@@ -1,0 +1,5 @@
+未完成：
+1.spring security 和 jwt 整合
+2.统一异常处理
+3.redis整合
+4.mapper 自动生成工具
