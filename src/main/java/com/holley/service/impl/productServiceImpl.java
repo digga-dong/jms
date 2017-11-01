@@ -2,15 +2,17 @@ package com.holley.service.impl;
 
 import com.holley.mapper.ProductinfoMapper;
 import com.holley.model.ProductinfoWithBLOBs;
-import com.holley.service.productService;
+import com.holley.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/11/1.
  */
-public class productServiceImpl implements productService {
+@Service
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductinfoMapper productinfoMapper;
@@ -24,5 +26,10 @@ public class productServiceImpl implements productService {
     @Override
     public int addProduct(ProductinfoWithBLOBs product) {
         return productinfoMapper.insert(product);
+    }
+
+    @Override
+    public ProductinfoWithBLOBs getProduct(Integer id) {
+        return this.productinfoMapper.selectByPrimaryKey(id);
     }
 }

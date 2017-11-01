@@ -7,9 +7,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/11/1.
  */
-public interface productService {
+public interface ProductService {
 
     List<ProductinfoWithBLOBs> getProductList();
 
     int addProduct(ProductinfoWithBLOBs product);
+
+    ProductinfoWithBLOBs getProduct(Integer id);
 }
