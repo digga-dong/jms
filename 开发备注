@@ -3,3 +3,12 @@
 2.统一异常处理
 3.redis整合
 4.mapper 自动生成工具
+5.使用swagger构建restful api
+6、缓存 EhCache
+
+
+已完成
+1.日志
+2.mybatis 整合
+3.性能监控 durid
+4.整合thymeleaf

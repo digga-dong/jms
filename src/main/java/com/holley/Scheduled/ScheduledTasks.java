@@ -1,5 +1,6 @@
 package com.holley.Scheduled;
 
+import com.holley.common.utils.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  */
 @Component
 public class ScheduledTasks {
+    private Logger logger = Logger.getLogger(this.getClass());
     //输出时间格式
     private static final SimpleDateFormat format = new SimpleDateFormat("HH(hh):mm:ss S");
 
@@ -28,6 +30,7 @@ public class ScheduledTasks {
 
     @Scheduled(initialDelay = 5000, fixedRate = 5000)
     public void firstScheduledTasks(){
-        System.out.println("定时任务执行，现在时间是 : "+format.format(new Date()));
+//        System.out.println("定时任务执行，现在时间是 : "+format.format(new Date()));
+        logger.info("定时任务执行，现在时间是 : "+format.format(new Date()));
     }
 }

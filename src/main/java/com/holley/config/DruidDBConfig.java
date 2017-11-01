@@ -1,7 +1,7 @@
 package com.holley.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.holley.Util.Logger;
+import com.holley.common.utils.Logger;
 import com.holley.enums.Level;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

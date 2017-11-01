@@ -1,6 +1,5 @@
 package com.holley.controller;
 
-import com.holley.Util.Logger;
 import com.holley.enums.Level;
 import com.holley.model.User;
 import com.holley.service.UserService;
@@ -14,9 +13,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/users")
-public class UserController {
-
-    private Logger logger = Logger.getLogger(this.getClass());
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;

@@ -1,4 +1,4 @@
-package com.holley.dao;
+package com.holley.mapper;
 
 import com.holley.model.User;
 import org.apache.ibatis.annotations.Mapper;
