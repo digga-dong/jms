@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holley.mapper.ProductinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.holley.model.Productinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="saleamount" property="saleamount" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.holley.model.ProductinfoWithBLOBs" extends="BaseResultMap" >
+    <result column="name" property="name" jdbcType="LONGVARCHAR" />
+    <result column="producttype" property="producttype" jdbcType="LONGVARCHAR" />
+    <result column="productcode" property="productcode" jdbcType="LONGVARCHAR" />
+    <result column="finishproductcode" property="finishproductcode" jdbcType="LONGVARCHAR" />
+    <result column="pictureurl" property="pictureurl" jdbcType="LONGVARCHAR" />
+    <result column="productclass" property="productclass" jdbcType="LONGVARCHAR" />
+    <result column="platform" property="platform" jdbcType="LONGVARCHAR" />
+    <result column="function" property="function" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, saleamount
+  </sql>
+  <sql id="Blob_Column_List" >
+    name, producttype, productcode, finishproductcode, pictureurl, productclass, platform, 
+    function
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.holley.model.ProductinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from productinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holley.model.ProductinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from productinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from productinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from productinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holley.model.ProductinfoExample" >
+    delete from productinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holley.model.ProductinfoWithBLOBs" >
+    insert into productinfo (id, saleamount, name, 
+      producttype, productcode, finishproductcode, 
+      pictureurl, productclass, platform, 
+      function)
+    values (#{id,jdbcType=INTEGER}, #{saleamount,jdbcType=INTEGER}, #{name,jdbcType=LONGVARCHAR}, 
+      #{producttype,jdbcType=LONGVARCHAR}, #{productcode,jdbcType=LONGVARCHAR}, #{finishproductcode,jdbcType=LONGVARCHAR}, 
+      #{pictureurl,jdbcType=LONGVARCHAR}, #{productclass,jdbcType=LONGVARCHAR}, #{platform,jdbcType=LONGVARCHAR}, 
+      #{function,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holley.model.ProductinfoWithBLOBs" >
+    insert into productinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="saleamount != null" >
+        saleamount,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="producttype != null" >
+        producttype,
+      </if>
+      <if test="productcode != null" >
+        productcode,
+      </if>
+      <if test="finishproductcode != null" >
+        finishproductcode,
+      </if>
+      <if test="pictureurl != null" >
+        pictureurl,
+      </if>
+      <if test="productclass != null" >
+        productclass,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="function != null" >
+        function,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="saleamount != null" >
+        #{saleamount,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="producttype != null" >
+        #{producttype,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productcode != null" >
+        #{productcode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finishproductcode != null" >
+        #{finishproductcode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pictureurl != null" >
+        #{pictureurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productclass != null" >
+        #{productclass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="function != null" >
+        #{function,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holley.model.ProductinfoExample" resultType="java.lang.Integer" >
+    select count(*) from productinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update productinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleamount != null" >
+        saleamount = #{record.saleamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.producttype != null" >
+        producttype = #{record.producttype,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.productcode != null" >
+        productcode = #{record.productcode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.finishproductcode != null" >
+        finishproductcode = #{record.finishproductcode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pictureurl != null" >
+        pictureurl = #{record.pictureurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.productclass != null" >
+        productclass = #{record.productclass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.function != null" >
+        function = #{record.function,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update productinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      saleamount = #{record.saleamount,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=LONGVARCHAR},
+      producttype = #{record.producttype,jdbcType=LONGVARCHAR},
+      productcode = #{record.productcode,jdbcType=LONGVARCHAR},
+      finishproductcode = #{record.finishproductcode,jdbcType=LONGVARCHAR},
+      pictureurl = #{record.pictureurl,jdbcType=LONGVARCHAR},
+      productclass = #{record.productclass,jdbcType=LONGVARCHAR},
+      platform = #{record.platform,jdbcType=LONGVARCHAR},
+      function = #{record.function,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update productinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      saleamount = #{record.saleamount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holley.model.ProductinfoWithBLOBs" >
+    update productinfo
+    <set >
+      <if test="saleamount != null" >
+        saleamount = #{saleamount,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="producttype != null" >
+        producttype = #{producttype,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productcode != null" >
+        productcode = #{productcode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finishproductcode != null" >
+        finishproductcode = #{finishproductcode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pictureurl != null" >
+        pictureurl = #{pictureurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productclass != null" >
+        productclass = #{productclass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="function != null" >
+        function = #{function,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.holley.model.ProductinfoWithBLOBs" >
+    update productinfo
+    set saleamount = #{saleamount,jdbcType=INTEGER},
+      name = #{name,jdbcType=LONGVARCHAR},
+      producttype = #{producttype,jdbcType=LONGVARCHAR},
+      productcode = #{productcode,jdbcType=LONGVARCHAR},
+      finishproductcode = #{finishproductcode,jdbcType=LONGVARCHAR},
+      pictureurl = #{pictureurl,jdbcType=LONGVARCHAR},
+      productclass = #{productclass,jdbcType=LONGVARCHAR},
+      platform = #{platform,jdbcType=LONGVARCHAR},
+      function = #{function,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holley.model.Productinfo" >
+    update productinfo
+    set saleamount = #{saleamount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
